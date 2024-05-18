@@ -7,6 +7,7 @@ Aggarwal, P., Cranford, E.A., Tambe, M., Lebiere, C., Gonzalez, C. (2023). Decep
 The human experiment dataset are available on OSF: https://osf.io/c7ntu/?view_only=0e6261b5e818440495d9917044611758
 
 For this particular implementation we are using:
+
     - 2022-MURIBookChapter-FullData-IAG.csv
     - AllConditions_humanData_dictionary.txt (dictionary with variables information)
 
