@@ -274,8 +274,8 @@ if __name__ == "__main__":
 
         human_predicted =  np.array(PersonalizedData['UserChoice']).astype(str)
         model_predicted  = np.array(PersonalizedData['ModelChoice']).astype(str)
-        plot_CM = GenerateConfusionMatrix(human_predicted , model_predicted ,'Human-Model',tracing, model_type, "ConfusionMatrixes_CD")
-        plot_LC = GenerateLearningCurves(PersonalizedData ,'Human-Model',tracing, model_type, "LearningCurves_CD")
+        plot_CM = GenerateConfusionMatrix(human_predicted , model_predicted ,'Human-Model',tracing, model_type, "ConfusionMatrixes")
+        plot_LC = GenerateLearningCurves(PersonalizedData ,'Human-Model',tracing, model_type, "LearningCurves")
 
         plotsStep1_CM.append(plot_CM)
         plotsStep1_LC.append(plot_LC)
@@ -289,8 +289,8 @@ if __name__ == "__main__":
         MachineCoveredHuman =  np.array(Covered_data['UserChoice']).astype(str)
         MachineCoveredModel = np.array(Covered_data['ModelChoice']).astype(str)
 
-        plot_CM = GenerateConfusionMatrix(MachineCoveredHuman, MachineCoveredModel, 'MachineCovered', tracing, model_type, "ConfusionMatrixes_CD")
-        plot_LC = GenerateLearningCurves(Covered_data, 'MachineCovered', tracing, model_type, "LearningCurves_CD")
+        plot_CM = GenerateConfusionMatrix(MachineCoveredHuman, MachineCoveredModel, 'MachineCovered', tracing, model_type, "ConfusionMatrixes")
+        plot_LC = GenerateLearningCurves(Covered_data, 'MachineCovered', tracing, model_type, "LearningCurves")
 
         Covered_data['TrialNumber']
 
@@ -302,8 +302,8 @@ if __name__ == "__main__":
         MachineNOTCoveredHuman =  np.array(NotCovered_data['UserChoice']).astype(str)
         MachineNOTCoveredModel = np.array(NotCovered_data['ModelChoice']).astype(str)
 
-        plot_CM = GenerateConfusionMatrix(MachineNOTCoveredHuman, MachineNOTCoveredModel, 'MachineNotCovered', tracing, model_type, "ConfusionMatrixes_CD")
-        plot_LC = GenerateLearningCurves(NotCovered_data, 'MachineNotCovered', tracing, model_type, "LearningCurves_CD")
+        plot_CM = GenerateConfusionMatrix(MachineNOTCoveredHuman, MachineNOTCoveredModel, 'MachineNotCovered', tracing, model_type, "ConfusionMatrixes")
+        plot_LC = GenerateLearningCurves(NotCovered_data, 'MachineNotCovered', tracing, model_type, "LearningCurves")
         
         NotCovered_data['TrialNumber']
 
@@ -318,14 +318,14 @@ if __name__ == "__main__":
         
         #############################################################################################
     ## When we are comparing more 3 model results       
-    """ CombinePlots(plotsStep1_CM, 1, 3, "Model-Human Syncronization", tracing, model_type, 'Human-Model', "ConfusionMatrixes_CD")
-    CombinePlots(plotsStep1_LC, 1, 3, "Model-Human Syncronization", tracing, model_type, 'Human-Model', "LearningCurves_CD")
-    CombinePlots(plotsStep2_CM, 3, 2, "Model-Human Syncronization split by GroundTruth", tracing, model_type, 'Split_GroundTruth', "ConfusionMatrixes_CD")
-    CombinePlots(plotsStep2_LC, 3, 2, "Model-Human Syncronization split by GroundTruth", tracing, model_type, 'Split_GroundTruth', "LearningCurves_CD")
+    """ CombinePlots(plotsStep1_CM, 1, 3, "Model-Human Syncronization", tracing, model_type, 'Human-Model', "ConfusionMatrixes")
+    CombinePlots(plotsStep1_LC, 1, 3, "Model-Human Syncronization", tracing, model_type, 'Human-Model', "LearningCurves")
+    CombinePlots(plotsStep2_CM, 3, 2, "Model-Human Syncronization split by GroundTruth", tracing, model_type, 'Split_GroundTruth', "ConfusionMatrixes")
+    CombinePlots(plotsStep2_LC, 3, 2, "Model-Human Syncronization split by GroundTruth", tracing, model_type, 'Split_GroundTruth', "LearningCurves")
      """
 
-    CombinePlots(plotsStep2_CM, 1, 2, "Model-Human Syncronization split by GroundTruth", tracing, model_type, 'Split_GroundTruth', "ConfusionMatrixes_CD")
-    CombinePlots(plotsStep2_LC, 1, 2, "Model-Human Syncronization split by GroundTruth", tracing, model_type, 'Split_GroundTruth', "LearningCurves_CD")
+    CombinePlots(plotsStep2_CM, 1, 2, "Model-Human Syncronization split by GroundTruth", tracing, model_type, 'Split_GroundTruth', "ConfusionMatrixes")
+    CombinePlots(plotsStep2_LC, 1, 2, "Model-Human Syncronization split by GroundTruth", tracing, model_type, 'Split_GroundTruth', "LearningCurves")
 
         
     sys.exit()
