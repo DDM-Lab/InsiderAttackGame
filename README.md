@@ -15,7 +15,7 @@ For this particular implementation we are using:
 
 `max_decays_IAG.csv` was generated after running Model-Fitting for each model containing the best decay for each participant.
 
-
+**NOTE:** For convenience we have added the csv files in the folder `Data`.
 
 ## A tour of the code
 
