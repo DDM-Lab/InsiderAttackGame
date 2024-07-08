@@ -1,0 +1,111 @@
+---
+title: "IAG Analysis Arunesh project"
+output: html_notebook
+---
+
+```{r Libraries}
+library(here)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(ggrepel)
+library(xtable)
+
+library(gmodels)
+library(DescTools)
+library(qqplotr)
+library(dunn.test)
+library(rstatix)
+
+library(afex); 
+library(parallel); 
+library(car); 
+library(emmeans)
+library(lme4)
+library(Matrix)
+library(coin)
+library(readxl)
+
+
+
+here()
+```
+
+
+```{r LoadData}
+
+""
+all_data_IAG <- read.csv(file =here("Data", "IAG_Game", "Fitting_Tracing_Data.csv"), na="NULL")
+
+#human_data = read.csv(file =here("Data", "IAG_Game", "2022-MURIBookChapter-FullData-IAG.csv"), na="NULL")
+
+head(all_data_IAG)
+
+```
+
+
+
+
+```{r}
+syncRate_data <- all_data_IAG %>%
+  filter(TrainingBlock %in% c(3, 4))
+
+head(syncRate_data)  
+  
+  
+syncRate_data <- syncRate_data%>%
+  group_by(Mturk_id, Condition, decay_value) %>%
+  summarize(
+    SyncRate_Value = sum(modelSyncUser)/n(),
+  )
+
+head(syncRate_data)  
+```
+
+```{r}
+syncRate_data %>%
+  group_by(Mturk_id) %>%
+  summarize(
+    min_SyncRate = min(SyncRate_Value),
+    decay_min = decay_value[which.min(SyncRate_Value)],
+    
+    max_SyncRate = max(SyncRate_Value),
+    decay_max = decay_value[which(SyncRate_Value == max(SyncRate_Value))[length(which(SyncRate_Value == max(SyncRate_Value)))]]
+  )
+
+# Count decays with min and max RSME for each participant
+syncRate_data %>%
+  group_by(Mturk_id) %>%
+  summarize(
+    count_min_SyncRate = sum(SyncRate_Value == min(SyncRate_Value)),
+    count_max_SyncRate = sum(SyncRate_Value == max(SyncRate_Value))
+  )
+```
+
+```{r}
+# Filter to include only rows with minimum SyncRate for each participant
+get_Max_SyncRate_rows <- syncRate_data %>%
+  group_by(Mturk_id, Condition) %>%
+  filter(SyncRate_Value == max(SyncRate_Value))
+
+
+head(get_Max_SyncRate_rows)
+
+
+# Find the maximum decay value for the minimum SyncRate for each participant
+max_decay_for_max_SyncRate <- get_Max_SyncRate_rows %>%
+  group_by(Mturk_id, Condition) %>%
+ arrange(desc(decay_value)) %>%
+  slice(1)
+
+head(max_decay_for_max_SyncRate)
+```
+
+```{r}
+# Saving the selected data frame to a CSV file
+
+
+
+write.csv(max_decay_for_max_SyncRate, "./max_decays_IAG.csv", row.names = FALSE)
+```
+
